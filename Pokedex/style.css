@@ -40,6 +40,26 @@ h1 {
   color: var(--primary-color);
 }
 
+/* Search */
+.search {
+  text-align: center;
+  background-color: var(--primary-color);
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+}
+
+.search input {
+  padding: 0.5rem;
+  min-width: 250px;
+  border-radius: 10px;
+  border: none;
+}
+
+.search label {
+  margin-right: 1rem;
+}
+
 /* Cards */
 .cards {
   margin: 0 auto;
@@ -88,6 +108,10 @@ h1 {
   background-color: var(--primary-color);
   color: white;
   z-index: 1;
+}
+
+.card-title::after {
+  content: '';
 }
 
 @media (max-width: 500px) {
