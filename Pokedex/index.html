@@ -18,15 +18,23 @@
           type="text"
           name="seach"
           id="search"
-          placeholder="Type pokemon name or type"
+          placeholder="Type pokemon name"
         />
       </div>
-      <div class="cards">
-        <!-- <div class="card">
-          <div class="card-img"></div>
-          <div class="card-title">Card 1</div>
-        </div> -->
+      <div class="filter">
+        <label for="filter">Filter by type: </label>
+        <select name="filter" id="filter">
+          <option value="none">None</option>
+          <option value="electic">Electric</option>
+          <option value="fire">Fire</option>
+          <option value="water">Water</option>
+          <option value="grass">Grass</option>
+          <option value="rock">Rock</option>
+          <option value="normal">Normal</option>
+          <option value="bug">Bug</option>
+        </select>
       </div>
+      <div class="cards"></div>
     </main>
     <script src="main.js"></script>
     <script
