@@ -13,7 +13,7 @@ class FetchWrapper {
 const API = new FetchWrapper('https://pokeapi.co/api/v2/pokemon/');
 //'https://pokeapi.co/api/v2/pokemon?limit=100&&offset=200
 
-let pokemons, imgLink, divCard, divImg, divTitle, cardsContainer;
+let pokemons, imgLink, divCard, divImg, divTitle, pType, cardsContainer;
 
 const createCard = () => {
   //Create card element, card image and card title
@@ -24,6 +24,7 @@ const createCard = () => {
   divImg.className = 'card-img';
   divTitle = document.createElement('div');
   divTitle.className = 'card-title';
+  pType = document.createElement('p');
   //Get container for cards
   cardsContainer = document.querySelector('.cards');
 };
@@ -41,8 +42,18 @@ const fetchPokemons = (pokemons) => {
         divCard.appendChild(divImg);
         divImg.style.backgroundImage = `url('${imgLink}')`;
         divCard.appendChild(divTitle);
-        let pokemonType = data.types[0].type.name;
-        divTitle.textContent = `${pokemon} (${pokemonType})`;
+        let pokemonTypes = data.types;
+        let pokemonType = '';
+        pokemonTypes.forEach((type) => {
+          // console.log(type.type.name);
+          pokemonType += type.type.name + ' ';
+        });
+        // console.log(pokemonTypes);
+        // pokemonType = data.types[0].type.name;
+        pType.className = pokemonType.trim();
+        pType.textContent = pokemonType.trim();
+        divTitle.textContent = pokemon;
+        divTitle.appendChild(pType);
         cardsContainer.appendChild(divCard);
       })
       .catch((err) => console.log(err));
@@ -78,5 +89,22 @@ const filter = document.querySelector('#filter');
 
 filter.addEventListener('change', () => {
   const type = filter.value;
-  console.log(type);
+  const cards = document.querySelectorAll('.card');
+  cards.forEach((card) => {
+    const cardClass = card.lastChild.childNodes[1].className;
+    console.log('Current class names: ' + cardClass);
+    //If filter is set to none display everything
+    if (type === 'none') {
+      card.style.display = 'inline-block';
+    }
+    //If the current card doesn't include searched type hide it
+    else if (!cardClass.includes(type)) {
+      console.log('Type to filter: ' + type);
+      card.style.display = 'none';
+    } else {
+      card.style.display = 'inline-block';
+    }
+    console.log(card.lastChild.childNodes[1].className);
+  });
+  // console.log(type);
 });
